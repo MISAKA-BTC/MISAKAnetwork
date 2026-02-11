@@ -1,6 +1,6 @@
 MISAKA Network（MISAKA Layer-1）
 
-stMISAKA Network は、
+MISAKA Network は、
 CPUマイニング可能な軽量 Proof-of-Work ブロックチェーン です。
 
 MISAKA エコシステムの 安全な決済・セキュリティ基盤（Layer-1） として設計されています。
