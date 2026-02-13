@@ -1,179 +1,173 @@
-MISAKA Network（MISAKA Layer-1）
+# 🇯🇵 日本語版 (README_JP.md)
+
+```markdown
+# 🚀 MISAKA Network (misakaL1)
+
+## 次世代ハイブリッド Layer1 ブロックチェーン
+### PoW × DAG × PoS Finality × Slashing × Bridge
 
 MISAKA Network は、
-CPUマイニング可能な軽量 Proof-of-Work ブロックチェーン です。
+DAGの高速処理能力と PoS Finality の強力なセキュリティを融合した
+次世代ハイブリッド型 Layer1 ブロックチェーンです。
 
-MISAKA エコシステムの 安全な決済・セキュリティ基盤（Layer-1） として設計されています。
+単一のコンセンサス方式に依存せず、
+各レイヤーに明確な役割分担を持たせることで、
 
-🎯 コンセプト
+✅ 高速  
+✅ 高セキュリティ  
+✅ 高分散  
 
-本プロジェクトは役割を明確に分離します。
+を同時に実現します。
 
-🔵 stMISAKA → ガス・マイニング・セキュリティ（L1ネイティブ）
+---
 
-🟣 MISAKA（Solana） → 取引・流動性・投機・DeFi
+# 🎯 設計思想
 
-👉 セキュリティと投機を分離することで
-安定したガス代と健全な経済設計 を実現します。
+> 速く作る → 並列化する → 確定する → 攻撃者を罰する
 
-✨ 特徴
+それぞれの層が最小責務を持ちます。
 
-RandomX CPUマイニング（公平ローンチ）
+| レイヤー | 役割 | 目的 |
+|-----------|-----------|-------------|
+| MisakaX (PoW) | ブロック生成 | 公平参加・Sybil耐性 |
+| DAG (GHOSTDAG) | 並列処理 | 高TPS・低遅延 |
+| PoS Finality | ブロック確定 | 51%攻撃防止 |
+| Slashing | 罰則 | 不正排除 |
+| Bridge | 相互運用 | Solana等との接続 |
 
-5秒ブロック
+---
 
-UTXOモデル（軽量・高速）
+# ⚙️ アーキテクチャ
 
-総供給固定（インフレなし）
-
-ラップトークン無し
-
-シンプルな在庫型ブリッジ
-
-初期セキュリティコスト：約2,000円/日
-
-🪙 ネイティブ通貨：stMISAKA
-シンボル：stMISAKA
-小数：9桁
-総供給：1,000,000,000（10億枚固定）
-
-
-用途：
-
-ガス代
-
-マイニング報酬
-
-手数料
-
-ネットワークセキュリティ
-
-stMISAKA が唯一のL1基軸通貨です。
-
-⛏ マイニング
-コンセンサス
-
-RandomX Proof-of-Work（CPU向け）
-
-ブロック時間
-
-5秒
-
-初期報酬
-
-2.5 stMISAKA / block
-
-1日発行量
-
-約 43,200 stMISAKA
-
-想定価格（約0.05円）の場合：
-👉 約2,000円/日のセキュリティ予算
-
-発行方式
-
-Coinbase = Emission Reserve から放出
-（無限発行なし・総供給上限を維持）
-
-発行寿命
-
-約 38年以上
-
-🌉 Solanaブリッジ（ラップトークン無し）
-
-本チェーンは wToken（ラップトークン）を作りません。
-
-既存の MISAKA（Solana）をそのまま利用します。
-
-資産構成
-チェーン	使用資産
-L1	stMISAKA
-Solana	既存MISAKA
-交換レート
-
-1 MISAKA = 10 stMISAKA
-
-ブリッジの流れ
-Solana → L1
-
-MISAKAをロック
-→ stMISAKAを受取
-
-L1 → Solana
-
-stMISAKAをバーン
-→ MISAKAを在庫から払い出し
-
-🔒 安全対策
-
-在庫枯渇・取り付け防止のため：
-
-1日出金上限：Vault残高の2%
-
-在庫20%未満で出金停止
-
-任意出金手数料
-
-運営が保有するMISAKAを初期流動性として供給します。
-
-📊 ジェネシス配分
-用途	割合
-マイニング（Emission）	60%
-ブリッジ流動性	30%
-トレジャリー	7%
-エコシステム	3%
-🏗 アーキテクチャ
-
-RandomX PoW
+MisakaX (PoW)
 ↓
-UTXOチェーン
+DAG (並列処理)
 ↓
-stMISAKA（ネイティブガス）
+PoS Finality
 ↓
-在庫型ブリッジ
+Slashing
 ↓
-Solana MISAKA 流動性
+Bridge
 
-👉 最小・単純・監査しやすい構成
 
-🎯 なぜラップトークンを作らないのか？
+---
 
-多くのチェーンは
+# 🔥 主な特徴
 
-wToken
+## 🟢 MisakaX（独自PoW）
+- CPU最適化マイニング
+- ASIC/NiceHash耐性
+- Epochごとに問題が変化する動的PoW
+- 公平な参加
 
-ガストークン
+👉 ハッシュレンタル攻撃を困難化
 
-補助トークン
+---
 
-などを増やしますが、
+## ⚡ DAGコンセンサス（GHOSTDAG）
+- ブロック並列生成可能
+- ボトルネック無し
+- 高スループット
+- 低レイテンシ
 
-本プロジェクトは トークン増殖＝複雑化＝リスク増大 と考えます。
+👉 Solana級の速度を目指す
 
-存在するのは：
+---
 
-stMISAKA（セキュリティ）
+## 🛡 PoS Finality
+- Validator署名によりブロック確定
+- 閾値署名（例：3/5）
+- 確定後は巻き戻し不可
 
-MISAKA（市場）
+👉 51%攻撃を理論的に無効化
 
-この2つだけ。
+---
 
-👉 経済設計が明快で強固になります。
+## ⚔ Slashing
+- 二重署名検出
+- オフライン罰則
+- 不正Validatorの自動除外
 
-🛣 ロードマップ
+👉 攻撃コストを経済的に不可能にする
 
-Phase 1 — L1ローンチ
-Phase 2 — ブリッジ流動性確保
-Phase 3 — Solanaブリッジ公開
-Phase 4 — ウォレット/ツール整備
-Phase 5 — 分散化拡大
+---
 
-❤️ 方針
+## 🌉 Bridge（予定）
+- Solana ↔ MISAKA
+- クロスチェーン資産移動
+- エコシステム拡張
 
-小さく始める
-徐々に成長する
-シンプルに保つ
-セキュリティ最優先
+---
 
-stMISAKA Network は
-「強い基盤」だけを提供する最小構成のPoWチェーンです。
+# 🔐 セキュリティモデル
+
+MISAKAは PoW のみに依存しません。
+
+中核は：
+
+Finality + Slashing
+
+
+- PoW → ブロック生成
+- Finality → 確定
+- Slashing → 罰則
+
+これにより
+
+❌ 51%攻撃  
+❌ Reorg攻撃  
+❌ ハッシュレンタル攻撃  
+
+を防止します。
+
+---
+
+# 🚀 ロードマップ
+
+## Phase 1
+- MisakaX PoW
+- DAG
+- PoS Finality
+- Slashing
+
+## Phase 2
+- Solana Bridge
+- Validator staking
+- Explorer / Dashboard
+
+## Phase 3
+- モジュラー化
+- ZK / VDF 研究
+- クロスチェーン拡張
+
+---
+
+# 🛠 開発方法
+
+ビルド:
+
+```bash
+cargo build --release
+ノード起動:
+
+./target/release/kaspad
+🎯 ビジョン
+MISAKAは
+
+「高速 × 高セキュリティ × 分散性」
+
+を同時に満たす
+次世代Layer1を目指します。
+
+公平マイニング
+
+高TPS
+
+即時確定
+
+強力な経済的セキュリティ
+
+クロスチェーン対応
+
+📜 ライセンス
+MIT
