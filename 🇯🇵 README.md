@@ -1,6 +1,3 @@
-# 🇯🇵 日本語版 (README_JP.md)
-
-```markdown
 # 🚀 MISAKA Network (misakaL1)
 
 ## 次世代ハイブリッド Layer1 ブロックチェーン
