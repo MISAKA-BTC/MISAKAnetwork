@@ -1,213 +1,167 @@
-MISAKA Network (MISAKA Layer-1)
+# 🚀 MISAKA Network (misakaL1)
 
-A lightweight, CPU-mineable Proof-of-Work blockchain designed as the secure settlement layer for the MISAKA ecosystem.
+## Next-Generation Hybrid Layer 1 Blockchain
+### PoW × DAG × PoS Finality × Slashing × Bridge
 
-    stMISAKA separates **security** from **speculation**:
+MISAKA Network is a next-generation hybrid Layer 1 blockchain that combines the speed of DAG-based consensus with the security of Proof-of-Stake finality.
 
-* 🔵 stMISAKA → native gas & mining coin (Layer-1)
-* 🟣 MISAKA (Solana) → liquid trading asset
+Instead of relying on a single consensus model, MISAKA separates responsibilities across layers:
 
-No wrapped tokens.
-    No complex token models.
-    Just a simple, deterministic PoW chain.
+- PoW for fair block production
+- DAG for high throughput
+- PoS Finality for security
+- Slashing for economic defense
+- Bridge for cross-chain interoperability
 
----
-
-# ✨ Key Features
-
-• RandomX CPU mining (fair launch)
-• 5-second blocks
-• UTXO model
-• Hard-cap supply
-• Inventory-based Solana bridge
-• No wrapped tokens (wToken-free design)
-• Low initial inflation (~¥2,000/day security budget)
+This design achieves **high performance, strong security, and decentralization at the same time**.
 
 ---
 
-# 🧠 Design Philosophy
+# 🎯 Design Philosophy
 
-We intentionally separate roles:
+> Mine fast → Parallelize → Finalize → Punish attackers
 
-    | Layer           | Purpose                     |
-| --------------- | --------------------------- |
-| stMISAKA (L1)   | Security / Gas / Settlement |
-| MISAKA (Solana) | Trading / Liquidity / DeFi  |
+Each layer has a clear and minimal responsibility.
 
-Security and speculation should not compete.
-
-    This keeps:
-
-    ✅ gas stable
-✅ economics predictable
-✅ implementation simple
-✅ attack surface small
+| Layer | Role | Purpose |
+|--------|---------|------------|
+| MisakaX (PoW) | Block production | Fair participation / Sybil resistance |
+| DAG (GHOSTDAG) | Parallel ordering | High TPS / Low latency |
+| PoS Finality | Block finalization | 51% attack prevention |
+| Slashing | Penalties | Remove malicious validators |
+| Bridge | Interoperability | Connect with Solana and others |
 
 ---
 
-# 🪙 Native Coin — stMISAKA
+# ⚙️ Architecture
+MisakaX (PoW mining)
+↓
+DAG / GHOSTDAG
+↓
+PoS Finality
+↓
+Slashing
+↓
+Bridge
 
-Symbol: stMISAKA
-Decimals: 9
-Total Supply: 1,000,000,000 (1B hard cap)
-
-Used for:
-
-• Gas fees
-• Mining rewards
-• Transaction settlement
-• Network security
-
----
-
-# ⛏ Mining
-
-### Consensus
-
-RandomX Proof-of-Work (CPU friendly)
-
-### Block Time
-
-5 seconds
-
-### Initial Reward
-
-2.5 stMISAKA / block
-
-### Daily Emission
-
-≈ 43,200 stMISAKA / day
-≈ ¥2,000/day security budget (at ~¥0.05)
-
-### Emission Method
-
-Coinbase = release from emission reserve
-(No mint-from-nothing. Hard cap always preserved)
-
-### Emission Lifetime
-
-≈ 38 years
 
 ---
 
-# 🌉 Solana Bridge (No Wrapped Token Model)
+# 🔥 Core Features
 
-Unlike most bridges, **we do NOT create wrapped tokens**.
+## 🟢 MisakaX (Custom PoW)
+- CPU-optimized mining
+- ASIC/NiceHash resistant
+- Epoch-based dynamic puzzles
+- Fair participation
 
-We use a simple inventory-backed vault.
-
-## Assets
-
-| Chain  | Asset                        |
-| ------ | ---------------------------- |
-| L1     | stMISAKA                     |
-| Solana | existing MISAKA (legacy SPL) |
-
-## Fixed Rate
-
-1 MISAKA (Solana) = 10 stMISAKA (L1)
+Prevents hash-rental attacks and hardware centralization.
 
 ---
 
-## Bridge Flow
+## ⚡ DAG Consensus (GHOSTDAG)
+- Parallel blocks
+- No bottlenecks
+- High throughput
+- Low latency
 
-### Solana → L1
-
-Lock MISAKA → receive stMISAKA
-
-### L1 → Solana
-
-Burn stMISAKA → receive MISAKA from vault
+Designed for Solana-class performance without sacrificing decentralization.
 
 ---
 
-# 🔒 Bridge Safety Rules
+## 🛡 PoS Finality
+- Validator signatures finalize blocks
+- Threshold confirmation (e.g. 3/5)
+- Irreversible once finalized
 
-To prevent bank runs:
-
-    • Max withdrawal: 2% vault per day
-• Withdraw paused if vault < 20%
-    • Optional withdrawal fee
-
-Operator provides initial liquidity from existing holdings.
+Makes 51% attacks economically and technically meaningless.
 
 ---
 
-# 📊 Genesis Allocation
+## ⚔ Slashing
+- Double-sign detection
+- Offline penalties
+- Automatic validator removal
 
-| Category          | %   |
-| ----------------- | --- |
-| Emission (Mining) | 60% |
-| Bridge Liquidity  | 30% |
-| Treasury          | 7%  |
-| Ecosystem         | 3%  |
+Attacks become financially irrational.
 
 ---
 
-# 🏗 Architecture
-
-RandomX PoW
-→ UTXO chain
-→ stMISAKA (native gas)
-→ Inventory bridge
-→ Solana MISAKA liquidity
-
-Minimal. Deterministic. Auditable.
+## 🌉 Bridge (Planned)
+- Solana ↔ MISAKA
+- Cross-chain assets
+- Ecosystem expansion
 
 ---
 
-# 🎯 Why No Wrapped Token?
+# 🔐 Security Model
 
-    Most chains add extra tokens (wToken, gas token, etc).
+MISAKA does **not rely solely on PoW security**.
 
-We deliberately avoid this to:
+Security is enforced by:
 
-    • reduce confusion
-• avoid liquidity fragmentation
-• prevent gas speculation
-• simplify accounting
+Finality + Slashing
+PoW produces blocks  
+Finality locks them  
+Slashing punishes attackers
 
-Only two assets exist:
+This architecture neutralizes:
 
-    * stMISAKA (security)
-* MISAKA (market)
-
-Nothing else.
-
----
-
-# 🛣 Roadmap
-
-Phase 1 — L1 launch
-Phase 2 — Bridge vault funding
-Phase 3 — Solana bridge live
-Phase 4 — Wallet integration
-Phase 5 — Ecosystem tools
+- 51% attacks
+- Reorg attacks
+- Hash-rental manipulation
 
 ---
 
-# 📚 Documentation
+# 🚀 Roadmap
 
-Full technical specification:
-    → docs/whitepaper.md
+## Phase 1
+- MisakaX PoW
+- DAG consensus
+- PoS Finality
+- Slashing
 
----
+## Phase 2
+- Solana Bridge
+- Validator staking
+- Explorer / dashboard
 
-# ⚖ License
-
-MIT
-
----
-
-# ❤️ Philosophy
-
-Start small.
-    Grow naturally.
-    Keep it simple.
-    Security first.
-
-    stMISAKA is not trying to be everything.
-    It is simply a strong, minimal settlement layer.
+## Phase 3
+- Modular upgrades
+- ZK / VDF research
+- Cross-chain ecosystem
 
 ---
+
+# 🛠 Development
+
+Build:
+
+```bash
+cargo build --release
+Run node:
+🎯 Vision
+
+MISAKA aims to be:
+
+The fastest and most secure hybrid Layer 1
+without sacrificing decentralization.
+
+Fair mining
+
+Massive throughput
+
+Instant finality
+
+Strong economic security
+
+Cross-chain ready
+
+📜 License
+
+MIT./target/release/kaspad
+
+
+
+
 
