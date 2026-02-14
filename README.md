@@ -1,167 +1,199 @@
-# 🚀 MISAKA Network (misakaL1)
+# MISAKA Network
 
-## Next-Generation Hybrid Layer 1 Blockchain
-### PoW × DAG × PoS Finality × Slashing × Bridge
+MISAKA Network is a high-performance Layer-1 blockchain built on a DAG-based parallel block structure with a custom epoch-key RandomX Proof-of-Work (MisakaX).
 
-MISAKA Network is a next-generation hybrid Layer 1 blockchain that combines the speed of DAG-based consensus with the security of Proof-of-Stake finality.
+It combines:
 
-Instead of relying on a single consensus model, MISAKA separates responsibilities across layers:
-
-- PoW for fair block production
-- DAG for high throughput
-- PoS Finality for security
-- Slashing for economic defense
-- Bridge for cross-chain interoperability
-
-This design achieves **high performance, strong security, and decentralization at the same time**.
+* **MisakaX (Epoch-key RandomX PoW)**
+* **DAG-based parallel block processing**
+* **Future PoS Finality layer**
+* **Slashing-ready validator framework**
+* **Bridge-ready architecture**
+* **OAuth-enabled wallet onboarding layer**
 
 ---
 
-# 🎯 Design Philosophy
+# 🧠 Architecture Overview
 
-> Mine fast → Parallelize → Finalize → Punish attackers
-
-Each layer has a clear and minimal responsibility.
-
-| Layer | Role | Purpose |
-|--------|---------|------------|
-| MisakaX (PoW) | Block production | Fair participation / Sybil resistance |
-| DAG (GHOSTDAG) | Parallel ordering | High TPS / Low latency |
-| PoS Finality | Block finalization | 51% attack prevention |
-| Slashing | Penalties | Remove malicious validators |
-| Bridge | Interoperability | Connect with Solana and others |
-
----
-
-# ⚙️ Architecture
-MisakaX (PoW mining)
-↓
-DAG / GHOSTDAG
-↓
-PoS Finality
-↓
-Slashing
-↓
-Bridge
-
-
----
-
-# 🔥 Core Features
-
-## 🟢 MisakaX (Custom PoW)
-- CPU-optimized mining
-- ASIC/NiceHash resistant
-- Epoch-based dynamic puzzles
-- Fair participation
-
-Prevents hash-rental attacks and hardware centralization.
+```
+           +----------------------+
+           |      Applications     |
+           +----------------------+
+                     │
+           +----------------------+
+           |   Wallet / OAuth     |
+           |  (Google / Apple)    |
+           +----------------------+
+                     │
+           +----------------------+
+           |   PoS Finality (WIP) |
+           |   Slashing-ready     |
+           +----------------------+
+                     │
+           +----------------------+
+           |      DAG Layer        |
+           | Parallel Block Graph  |
+           +----------------------+
+                     │
+           +----------------------+
+           |    MisakaX PoW       |
+           | Epoch-key RandomX    |
+           +----------------------+
+```
 
 ---
 
-## ⚡ DAG Consensus (GHOSTDAG)
-- Parallel blocks
-- No bottlenecks
-- High throughput
-- Low latency
+# 🔥 MisakaX (Epoch-key RandomX)
 
-Designed for Solana-class performance without sacrificing decentralization.
+MisakaX is a custom Proof-of-Work derived from RandomX with deterministic epoch rotation.
 
----
+### Key Features
 
-## 🛡 PoS Finality
-- Validator signatures finalize blocks
-- Threshold confirmation (e.g. 3/5)
-- Irreversible once finalized
+* Epoch-based key rotation
+* Prevents long-term ASIC optimization
+* Maintains CPU-favoring characteristics
+* Compatible with DAG parallelism
 
-Makes 51% attacks economically and technically meaningless.
+### Epoch Rule
 
----
+```
+epoch_id = header.daa_score / 1000
+key = BLAKE3("stmisaka-randomx" || epoch_id_le)
+```
 
-## ⚔ Slashing
-- Double-sign detection
-- Offline penalties
-- Automatic validator removal
+* Every 1000 DAA score units, RandomX cache is regenerated.
+* VM reinitializes only on epoch switch.
+* PoW input format remains unchanged (48 bytes):
 
-Attacks become financially irrational.
-
----
-
-## 🌉 Bridge (Planned)
-- Solana ↔ MISAKA
-- Cross-chain assets
-- Ecosystem expansion
+```
+PRE_POW_HASH || TIMESTAMP || NONCE
+```
 
 ---
 
-# 🔐 Security Model
+# 🌐 DAG Parallelism
 
-MISAKA does **not rely solely on PoW security**.
+MISAKA Network inherits high-throughput DAG architecture:
 
-Security is enforced by:
-
-Finality + Slashing
-PoW produces blocks  
-Finality locks them  
-Slashing punishes attackers
-
-This architecture neutralizes:
-
-- 51% attacks
-- Reorg attacks
-- Hash-rental manipulation
+* Multiple blocks can be created in parallel.
+* No strict single-chain bottleneck.
+* Blue work scoring determines block ordering.
+* High scalability without sacrificing security.
 
 ---
 
-# 🚀 Roadmap
+# 🛡 Planned PoS Finality (Phase 2)
 
-## Phase 1
-- MisakaX PoW
-- DAG consensus
-- PoS Finality
-- Slashing
+To enhance 51% attack resistance:
 
-## Phase 2
-- Solana Bridge
-- Validator staking
-- Explorer / dashboard
+* Validator-based finality voting
+* 3-of-4 (configurable) validator threshold
+* Double-sign detection
+* Slashing-ready logic
+* State machine:
 
-## Phase 3
-- Modular upgrades
-- ZK / VDF research
-- Cross-chain ecosystem
+  ```
+  pending → finalized
+  ```
+
+Finality layer is deterministic and cryptographically verifiable.
 
 ---
 
-# 🛠 Development
+# ⚖ Slashing (Planned)
 
-Build:
+Designed to punish malicious validators:
+
+* Double-sign evidence
+* Competing vote detection
+* Cryptographic proof generation
+* On-chain slashing record
+
+---
+
+# 🌉 Bridge Architecture (Planned)
+
+Future bridge integration includes:
+
+* stMISAKA token model
+* Lock-and-mint architecture
+* External chain verification
+* Cross-chain proof validation
+
+Bridge module exists but is not yet activated.
+
+---
+
+# 🔐 OAuth Wallet Layer
+
+MISAKA supports user-friendly onboarding:
+
+* Google login
+* Apple login (planned)
+* Discord login (planned)
+* Wallet key derivation after OAuth verification
+* Signature-based wallet linking
+
+This layer is separate from consensus.
+
+---
+
+# ⚙ Node Setup
+
+## Build
 
 ```bash
-cargo build --release
-Run node:
-🎯 Vision
+cargo build -p kaspad --release
+```
 
-MISAKA aims to be:
+## Run
 
-The fastest and most secure hybrid Layer 1
-without sacrificing decentralization.
+```bash
+./target/release/kaspad --rpclisten=0.0.0.0:16110
+```
 
-Fair mining
+Open ports:
 
-Massive throughput
+* 16111 (P2P)
+* 16110 (RPC)
 
-Instant finality
+---
 
-Strong economic security
+# 📈 Token Emission
 
-Cross-chain ready
+* Total supply: 5,000,000,000
+* Emission model: decay-based
+* Halving period: 730 days
+* Daily decay unchanged
 
-📜 License
+---
 
-MIT./target/release/kaspad
+# 🚀 Development Roadmap
 
+| Phase   | Feature                     | Status  |
+| ------- | --------------------------- | ------- |
+| Phase 1 | MisakaX PoW                 | ✅ Live  |
+| Phase 1 | DAG Layer                   | ✅ Live  |
+| Phase 2 | PoS Finality                | 🚧      |
+| Phase 2 | Slashing                    | 🚧      |
+| Phase 3 | Bridge                      | 🚧      |
+| Phase 3 | Smart Contracts (Rust/WASM) | Planned |
 
+---
 
+# 🔎 Current Status
 
+* MisakaX epoch-based RandomX implemented
+* Cache rotation working
+* Logs show epoch switching
+* Network running
+* Finality not yet enabled
+
+---
+
+# 📄 License
+
+MIT License
+
+---
 
